@@ -167,7 +167,7 @@ const deleteAppointment = async (req, res, next) => {
 const getMyDoctorAppointments = async (req, res, next) => {
     try {
         const appointments = await Appointment.find({ doctorId: req.user._id })
-            .populate('patientId', 'name email riskLevel')
+            .populate('patientId', 'name email phone profileImage riskLevel bloodReports')
             .populate('serviceId', 'serviceName')
             .populate('timeSlotId')
             .sort({ date: 1, tokenNumber: 1 });

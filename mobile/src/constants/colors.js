@@ -1,15 +1,24 @@
 export default {
-    primary: '#0891B2',
-    primaryDark: '#0E7490',
-    primaryLight: '#22D3EE',
-    secondary: '#6366F1', // indigo
-    success: '#10B981', // green
-    warning: '#F59E0B', // amber
-    danger: '#EF4444', // red
-    background: '#F9FAFB',
+    primary: '#2563EB',
+    primaryDark: '#1D4ED8',
+    primaryLight: '#3B82F6',
+    primaryFaded: '#EFF6FF',
+    secondary: '#64748B',
+    accent: '#059669',
+    accentLight: '#10B981',
+    accentFaded: '#ECFDF5',
+    success: '#10B981',
+    warning: '#F59E0B',
+    danger: '#EF4444',
+    background: '#F8FAFC',
     surface: '#FFFFFF',
-    text: '#111827',
-    textSecondary: '#6B7280',
-    border: '#E5E7EB',
-    disabled: '#9CA3AF',
+    text: '#0F172A',
+    textSecondary: '#64748B',
+    textLight: '#94A3B8',
+    border: '#E2E8F0',
+    borderLight: '#F1F5F9',
+    disabled: '#CBD5E1',
+    shadow: '#0F172A',
+    inputBg: '#F8FAF9',
+    cardBg: '#FFFFFF',
 };

@@ -35,11 +35,17 @@ export const AuthProvider = ({ children }) => {
     const login = async (email, password) => {
         try {
             const response = await axiosInstance.post('/api/users/login', { email, password });
-            const { token: newToken, user: userData } = response.data;
+            const { token: newToken, ...basicUserData } = response.data;
 
             await saveToken(newToken);
             setToken(newToken);
-            setUser(userData);
+
+            // Fetch full profile data so patient info fills immediately
+            const profileResponse = await axiosInstance.get('/api/users/profile', {
+                headers: { Authorization: `Bearer ${newToken}` }
+            });
+            setUser(profileResponse.data);
+
             return { success: true };
         } catch (error) {
             return {
@@ -72,9 +78,9 @@ export const AuthProvider = ({ children }) => {
     };
 
     const isAuthenticated = !!token;
-    const isAdmin = user?.role === ROLES.ADMIN;
-    const isDoctor = user?.role === ROLES.DOCTOR;
-    const isPatient = user?.role === ROLES.PATIENT;
+    const isAdmin = user?.role?.toUpperCase() === ROLES.ADMIN;
+    const isDoctor = user?.role?.toUpperCase() === ROLES.DOCTOR;
+    const isPatient = user?.role?.toUpperCase() === ROLES.PATIENT;
 
     return (
         <AuthContext.Provider

@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Portal, Dialog, Button, Text } from 'react-native-paper';
 import colors from '../../constants/colors';
 
-const ConfirmDialog = ({ visible, title, message, onConfirm, onCancel }) => {
+const ConfirmDialog = ({ visible, title, message, onConfirm, onCancel, confirmText = 'Confirm', confirmColor }) => {
     return (
         <Portal>
             <Dialog visible={visible} onDismiss={onCancel} style={styles.dialog}>
@@ -15,8 +15,8 @@ const ConfirmDialog = ({ visible, title, message, onConfirm, onCancel }) => {
                     <Button onPress={onCancel} textColor={colors.textSecondary}>
                         Cancel
                     </Button>
-                    <Button onPress={onConfirm} textColor={colors.primary}>
-                        Confirm
+                    <Button onPress={onConfirm} textColor={confirmColor || colors.primary}>
+                        {confirmText}
                     </Button>
                 </Dialog.Actions>
             </Dialog>

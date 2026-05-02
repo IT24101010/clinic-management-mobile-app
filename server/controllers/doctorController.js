@@ -6,7 +6,7 @@ const User = require('../models/User');
 // @access  Public
 const getAllDoctors = async (req, res) => {
     try {
-        const doctors = await DoctorProfile.find({ isAvailable: true }).populate('userId', 'name email');
+        const doctors = await DoctorProfile.find({ isAvailable: true }).populate('userId', 'name email profileImage');
         res.status(200).json(doctors);
     } catch (error) {
         res.status(500).json({ message: error.message || 'Error fetching doctors' });
@@ -18,7 +18,7 @@ const getAllDoctors = async (req, res) => {
 // @access  Private/Admin
 const getAllDoctorsAdmin = async (req, res) => {
     try {
-        const doctors = await DoctorProfile.find({}).populate('userId', 'name email');
+        const doctors = await DoctorProfile.find({}).populate('userId', 'name email profileImage');
         res.status(200).json(doctors);
     } catch (error) {
         res.status(500).json({ message: error.message || 'Error fetching doctors' });
@@ -30,7 +30,7 @@ const getAllDoctorsAdmin = async (req, res) => {
 // @access  Public
 const getDoctorById = async (req, res) => {
     try {
-        const doctor = await DoctorProfile.findById(req.params.id).populate('userId', 'name email');
+        const doctor = await DoctorProfile.findById(req.params.id).populate('userId', 'name email profileImage');
 
         if (!doctor) {
             return res.status(404).json({ message: 'Doctor profile not found' });
@@ -87,7 +87,7 @@ const updateDoctorProfile = async (req, res) => {
             req.params.id,
             req.body,
             { new: true, runValidators: true }
-        ).populate('userId', 'name email');
+        ).populate('userId', 'name email profileImage');
 
         res.status(200).json(updatedDoctor);
     } catch (error) {
